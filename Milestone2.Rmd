@@ -1,0 +1,88 @@
+---
+title: "Milestone2"
+author: "Unnati"
+date: "2024-06-26"  # Replace with today's date or a specific date format
+output: 
+  pdf_document:
+    latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Load necessary packages
+library(dplyr)
+library(ggplot2)
+data <-read.csv("/Users/unnatigaglani/Downloads/parkinsons_disease_data.csv")
+```
+
+# Question 1: Difference in mean MoCA scores between patients with and without Parkinson's disease
+# Hypotheses:
+# H0: µ1 = µ2 (Mean MoCA scores are the same for both groups)
+#H1: µ1 \neq µ2 (Mean MoCA scores are different for both groups)
+# Two-sample t-test
+
+```{r Question1}
+park_data <- filter(data, Diagnosis == 1) %>% select(MoCA)
+no_park_data <- filter(data, Diagnosis == 0) %>% select(MoCA)
+t.test(park_data$MoCA, no_park_data$MoCA, var.equal = TRUE)
+```
+
+#Interpretation
+#t-value: -8.06
+#Degrees of freedom (df): 2103
+#p-value: 1.267e-15 (which is extremely small)
+#95% confidence interval for the difference in means: -3.83 to -2.33
+#Mean MoCA scores:
+#Patients with Parkinson's disease (Diagnosis == 1): 13.92
+#Patients without Parkinson's disease (Diagnosis == 0): 17.00
+#Since the p-value is much less than 0.05, we reject the null hypothesis (H0). This indicates a significant difference in the mean MoCA scores between patients with and without Parkinson's disease. Patients without Parkinson's disease have higher mean MoCA scores.
+
+# Question 2: Is the average UPDRS score significantly greater than 50 for patients diagnosed with Parkinson's disease?
+# Hypotheses:
+# H0: µ = 50 (Mean UPDRS score is equal to 50)
+# H1: µ > 50 (Mean UPDRS score is greater than 50)
+```{r}
+updrs_data <- data %>% filter(Diagnosis == 1) %>% select(UPDRS)
+t.test(updrs_data$UPDRS, mu = 50, alternative = "greater")
+```
+#Interpretation
+# t-value: 51.559
+#Degrees of freedom (df): 1303
+#p-value: < 2.2e-16 (which is extremely small)
+#95% confidence interval for the mean: from 116.86 to infinity
+#Mean UPDRS score: 119.06
+#Since the p-value is much less than 0.05, we reject the null hypothesis (H0). This indicates that the mean UPDRS score for patients with Parkinson's disease is significantly greater than 50.
+
+# Question 3: Is there a difference in mean BMI between patients with and without a history of traumatic brain injury?
+# Hypotheses:
+# H0: µ1 = µ2 (Mean BMI is the same for both groups)
+# H1: µ1 \neq µ2 (Mean BMI is different for both groups)
+```{r}
+tbi_data <- data %>% filter(TraumaticBrainInjury == 1) %>% select(BMI)
+no_tbi_data <- data %>% filter(TraumaticBrainInjury == 0) %>% select(BMI)
+
+t.test(tbi_data$BMI, no_tbi_data$BMI, var.equal = TRUE)
+```
+#Interpretation:
+#t-value: -1.5467
+#Degrees of freedom (df): 2103
+#p-value: 0.1221
+#95% confidence interval for the difference in means: -1.79 to 0.21
+#Mean BMI values:
+# Patients with a history of traumatic brain injury: 26.51
+#Patients without a history of traumatic brain injury: 27.29
+#Since the p-value is greater than 0.05, we fail to reject the null hypothesis (H0). This indicates that there is no significant difference in the mean BMI between patients with and without a history of traumatic brain injury.
+```{r}
+# Output results
+print("MoCA scores comparison:")
+print(t.test(park_data$MoCA, no_park_data$MoCA, var.equal = TRUE))
+print("UPDRS scores comparison:")
+print(t.test(updrs_data$UPDRS, mu = 50, alternative = "greater"))
+print("BMI scores comparison:")
+print(t.test(tbi_data$BMI, no_tbi_data$BMI, var.equal = TRUE))
+```
+
+
+
+
+
