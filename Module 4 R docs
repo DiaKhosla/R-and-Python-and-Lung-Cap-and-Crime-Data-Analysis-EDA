@@ -1,0 +1,133 @@
+
+Introduction
+This assignment consists of two parts, both requiring the application of t-tests to evaluate specific hypotheses using the R programming language. In first part, I have utilized the "MASS" library and selected the dataset "cats" to determine if there is a significant difference in body weights between male and female cats. Additionally, I have considered a sample size of less than 30 to conduct the analysis. The second part of the report evaluates the impact of a meditation workshop on sleep quality scores among 10 students. 
+Objectives
+Part 1: Analyze body weights of male and female cats
+To determine if there is a significant difference in body weights between male and female cats using the "cats" dataset from the "MASS" library.
+
+Part 2: Evaluate the effect of meditation on sleep quality
+To evaluate whether meditation has an effect on sleep quality scores among 10 students using paired t-tests at different significance levels (α = 0.05 and α = 0.1).
+Methodology
+The output will include the t-statistic, degrees of freedom, p-value, and confidence interval for the difference in means at significance levels α = 0.05 and α = 0.1. Based on the p-values, we will determine whether to reject the null hypothesis and conclude if there is a significant improvement in sleep quality after the meditation workshop. We will compare the results for different significance levels to see if our conclusion changes.
+
+
+
+
+
+
+
+Analysis of the cats Dataset
+Summary of the Dataset
+The cats dataset from the MASS package contains data on the body weight (Bwt) and heart weight (Hwt) of 144 cats, split into 47 females (F) and 97 males (M). Here's the initial summary and structure of the dataset:
+  
+Overview of the Dataset:
+•	The dataset contains information on 144 cats, including their sex (Male or Female), body weight (Bwt in kg), and heart weight (Hwt in grams).
+•	There are 47 female cats and 97 male cats.
+
+  
+
+•	Male cats tend to have a slightly higher median bodyweight than female cats.
+•	There is greater variability in bodyweights among male cats, indicated by the wider interquartile range.
+•	The spread of bodyweights (excluding outliers) is similar between male and female cats, but male cats exhibit more extreme values as outliers.
+
+Welch Two Sample t-test: To determine if there is a significant difference in body weight between male and female cats:
+ 
+T-Test Analysis: A Welch Two Sample t-test was conducted to compare the body weight of male and female cats. 
+Hypotheses:
+•	Null Hypothesis (H0): There is no significant difference in the mean body weight between male and female cats (µ1 = µ2).
+•	Alternative Hypothesis (HA): There is a significant difference in the mean body weight between male and female cats (µ1 ≠ µ2).
+Results:
+•	t = -8.7095
+•	df = 136.84
+•	p-value = 8.831e-15
+•	95% CI: (-0.6631, -0.4177)
+•	Mean of Female Bwt = 2.3596 kg
+•	Mean of Male Bwt = 2.9 kg
+Interpretation:
+•	The p-value is extremely low (p < 0.05), specifically 8.831e-15. A p-value lower than 0.05 indicates strong evidence against the null hypothesis, leading us to reject it. Thus, indicating a significant difference in the body weights of male and female cats.
+•	The confidence interval for the difference in means is (-0.6631, -0.4177). This interval does not include zero, which supports the conclusion that there is a significant difference in body weights.
+•	We reject the null hypothesis and conclude and conclude that here is a significant difference in body weights between male and female cats, with males having a higher average body weight.
+Testing with Smaller Sample Size
+A sample of 20 cats from each sex was selected and another Welch Two Sample t-test was performed.
+ 
+
+Results:
+•	t = 4.8913
+•	df = 31.906
+•	p-value = 2.743e-05
+•	95% CI: (0.3414, 0.8286)
+•	Mean of Sample Male Bwt = 2.935 kg
+•	Mean of Sample Female Bwt = 2.35 kg
+Interpretation:
+•	The p-value is very low (p < 0.05), indicating a significant difference between the sampled body weights of male and female cats.
+•	The confidence interval for the difference in means is (0.3414, 0.8286). This interval does not include zero, supporting the conclusion that there is a significant difference. The interval suggests that we are 95% confident that the true difference in body weights between male and female cats lies somewhere between 0.3414 kg and 0.8286 kg.
+•	A key aspect of this confidence interval is that it does not include zero.
+•	If the confidence interval included zero, it would suggest that there is a possibility that there is no difference in the means (i.e., the true difference could be zero).
+•	We reject the null hypothesis for the sampled data as well, further supporting the hypothesis and conclude that the sampled male cats have a higher average body weight than the sampled female cats.
+Justification of Test:
+•	We used Welch's t-test because it does not assume equal variances between the groups (male and female cats). This test is appropriate when the assumption of equal variances (as required by the standard two-sample t-test) may not hold, ensuring robustness and accuracy in our conclusions.
+
+
+Meditation and Sleep Quality Analysis
+ 
+
+This demonstrates a notable improvement in mean sleep quality after medication. Let's conduct both unpaired and paired two-sample t-tests to test our hypotheses. Additionally, we'll determine which test is more appropriate and discuss the significance level differences. Paired Two-Sample test compares the means of two related groups. It's appropriate when comparing the mean sleep quality of the same individuals before and after medication.
+Choosing the Better Test:
+•	Unpaired t-test: This is appropriate when comparing two independent groups (e.g., different individuals before and after an intervention).
+•	Paired t-test: This is appropriate when comparing the same group of individuals before and after an intervention, where the measurements are paired.
+•	The paired t-test typically has higher power (ability to detect differences when they exist) compared to the unpaired t-test because it reduces variability by accounting for individual differences within the same subjects.
+Hypotheses:
+•	Null Hypothesis (H₀): There is no significant improvement in mean sleep quality after meditation. H₀: µ1 = µ2
+•	Alternative Hypothesis (Hₐ): There is a significant improvement in mean sleep quality after meditation. Hₐ: µ2 > µ1
+µ1 = Average sleeping quality mean in the week before the workshop
+µ2 = Average sleeping quality mean in the week after the workshop
+
+Analysis of Paired T-Tests 
+
+In the context of evaluating sleep quality before and after a meditation workshop, the paired t-test is appropriate because each individual's sleep quality score before meditation is paired with their sleep quality score after meditation. It is typically applied when the data points are paired or matched in some way, such as when each data point in one group corresponds uniquely to a data point in the other group.  
+Hypotheses
+Null Hypothesis (H0): The mean sleep quality scores before and after meditation are equal.
+•	H0: µbefore = µafter
+Alternative Hypothesis (HA): The mean sleep quality score after meditation is different from before (two-tailed) or higher (one-tailed).
+•	HA: µafter ≠ µbefore (two-tailed)
+•	HA: µafter > µbefore (one-tailed, in this case)
+
+Paired T-Test with α = 0.05 (95% Confidence Level) 
+
+•	The p-value of 0.04161 is less than the significance level (α = 0.05). Therefore, we reject the null hypothesis (H0) in favor of the alternative hypothesis (HA). This indicates that there is sufficient evidence to conclude that the mean sleep quality score after meditation is significantly lower than before.
+•	The 95% confidence interval for the mean difference (-Inf, -0.03659503) indicates that we are 95% confident that the true mean difference in sleep quality scores lies between negative infinity and -0.03659503. Since this interval does not include zero, it supports the conclusion of a significant decrease in sleep quality after meditation.
+•	The sample estimate of the mean difference is -0.62. This means, on average, participants experienced a decrease of 0.62 points in their sleep quality scores after participating in the meditation workshop.
+Paired T-Test with α = 0.1 (90% Confidence Level)
+•	The p-value of 0.04161 is less than the significance level (α = 0.1). Thus, we also reject the null hypothesis (H0) at the α = 0.1 level of significance. This reinforces the conclusion that there is a significant decrease in sleep quality after meditation.
+•	The 90% confidence interval for the mean difference (-Inf, -0.1798384) provides a narrower range compared to the 95% confidence interval. It also excludes zero, indicating strong evidence against the null hypothesis.
+•	Mean Difference: The sample estimate of the mean difference remains -0.62, indicating consistent findings across both confidence levels tested.
+Comparison of Results:
+•	Both tests (α = 0.05 and α = 0.1) yield the same conclusion: there is a statistically significant decrease in sleep quality after the meditation workshop.
+•	The confidence intervals provide a range within which we are confident the true mean difference lies. Both intervals (-Inf, -0.03659503 for α = 0.05 and -Inf, -0.1798384 for α = 0.1) exclude zero, reinforcing the significance of the results.
+Conclusion:
+The paired t-tests conducted at α = 0.05 and α = 0.1 both support the conclusion that there is a significant decrease in sleep quality after participating in the meditation workshop. The findings are robust across different levels of significance, indicating strong evidence for the impact of meditation on sleep quality based on the provided data.
+Changing the significance level from 0.05 to 0.1 did not change the paired t-test, but it did affect the independent samples t-test, where the p-value was slightly above 0.1.
+In hypothesis testing, the significance level (denoted as α) is the probability threshold that defines when we reject the null hypothesis (H0). It represents the risk of concluding there is an effect when there isn't one (Type I error). The commonly used significance levels are 0.05 (5%) and 0.1 (10%).
+•	α = 0.05: This is a more stringent criterion. It means that we are willing to accept a 5% chance of incorrectly rejecting the null hypothesis.
+•	α = 0.1: This is a less stringent criterion compared to α = 0.05. It means that we are willing to accept a 10% chance of incorrectly rejecting the null hypothesis.
+Conclusion:
+The paired t-test for analyzing the effect of meditation on sleep quality seems better on the part 2 due to its suitability for paired data, its ability to directly assess within-subject changes, and its straightforward interpretation of results. It allows for a clear evaluation of whether sleep quality significantly changes after participation in the meditation workshop. Therefore, based on the structure of the data and the paired t-test is the most appropriate statistical test for this analysis.
+Reference:- 
+•	Bluman, A. G. (2016). Elementary statistics: A step by step approach (10th ed.). McGraw-Hill. ISBN 978-1-260-04200-9. 
+•	Kabacoff, R. (2015). R in action (2nd ed.). Manning. ISBN 978-1-617-29138-8.
+•	Redirecting. (2024). https://northeastern.instructure.com/courses/174180/modules
+•	Lumen. (n.d.). Concepts in Statistics: Module 8: Inference for One Proportion.  https://courses.lumenlearning.com/wm-concepts-statistics/chapter/hypothesis-test-for-a-population-proportion-2-of-3/
+•	R-bloggers. (2022, December). Hypothesis Testing in R. R-bloggers. https://www.r-bloggers.com/2022/12/hypothesis-testing-in-r/
+•	StatQuest. (n.d.). Hypothesis testing and the null hypothesis [Video]. YouTube. https://www.youtube.com/watch?v=VFEDOqpuAeQ
+•	Redirecting. (2024). https://northeastern.instructure.com/courses/174180/modules
+•	GeeksforGeeks. (n.d.). Hypothesis testing in R Programming.  https://www.geeksforgeeks.org/hypothesis-testing-in-r-programming/
+•	Duke University. Two Independent Samples Unequal Variance (Welch’s Test) (n.d.). Welch’s t-test. Statistics review.  https://sites.nicholas.duke.edu/statsreview/means/welch/
+•	T-test essentials: Definition, formula and calculation. How to do two-sample t-test in R from https://www.datanovia.com/en/lessons/how-to-do-a-t-test-in-r-calculation-and-reporting/how-to-do-two-sample-t-test-in-r/
+•	Frost, J. (n.d.). Understanding significance levels in statistics. Statistics by Jim. https://statisticsbyjim.com/hypothesis-testing/significance-levels/
+•	DataCamp. (n.d.). T-tests in R tutorial: Learn how to conduct t-tests. Determine if there is a significant difference between the means of the two groups using t.test() in R. https://www.datacamp.com/tutorial/t-tests-r-tutorial
+
+
+
+
+
+
